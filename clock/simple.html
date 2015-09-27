@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Digital Clock</title>
+</head>
+<body onload="initClock();">
+	<div id="clock"></div>
+	<script type="text/javascript">
+		
+		function initClock() {
+			var time = new Date();
+			var clock = {};
+
+			//Calculating Hours
+			clock.hours = time.getHours();
+			if( clock.hours > 12 ) {
+				clock.hours -= 12;
+				clock.meridian = ' PM';
+			} else {
+				clock.meridian = ' AM';
+			}
+
+			//Calculating Minutes
+			clock.minutes = time.getMinutes();
+
+			//Calculating Seconds
+			clock.seconds = time.getSeconds();
+
+			//Rounding Off digits
+			for (key in clock) {
+				if( clock[key] < 10 ) 
+					clock[key] = '0' + clock[key];
+			};
+
+			//Display time
+			document.getElementById('clock').innerHTML = clock.hours + ' : ' + clock.minutes + ' : ' + clock.seconds + clock.meridian;
+
+			//loop
+			setTimeout(function(){
+				initClock();
+			},1000);
+		}
+		
+	</script>
+</body>
+</html>
